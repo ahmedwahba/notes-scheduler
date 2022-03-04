@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class NotesService {
-  @Output() updateNotesEvent = new EventEmitter<Note>();
+  @Output() updateNotesEvent = new EventEmitter<Note | number>();
 
   constructor(public httpClient: HttpClient) { }
 
@@ -24,7 +24,7 @@ export class NotesService {
     return this.httpClient.put(environment.endpoint + `notes/${note.id}`, note);
   }
 
-  updateNotes(note: Note): void {
+  updateNotes(note: Note | number): void {
     this.updateNotesEvent.emit(note);
   }
 }

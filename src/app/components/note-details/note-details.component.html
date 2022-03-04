@@ -47,6 +47,11 @@
           <input matInput formControlName="duration" placeholder="note end date" >
         </mat-form-field>
       </div>
+      <button *ngIf="isEditingMode"  mat-icon-button
+        class="action-btn delete-btn"
+        (click)="onDeleteNoteClick($event)">
+        <mat-icon>delete_forever</mat-icon>
+      </button>
     </mat-card-content>
   </mat-card>
 </mat-dialog-content>

@@ -88,4 +88,9 @@ export class NoteDetailsComponent implements OnInit {
         this.dialogRef.close();
       });
   }
+
+  onDeleteNoteClick(): void {
+    this.notesService.updateNotes(this.note.id);
+    this.dialogRef.close();
+  }
 }

@@ -39,9 +39,14 @@ export class NotesTableComponent implements OnInit {
     this.themeService.themeToggledEvent.subscribe((theme: string) => {
       this.currentTheme = theme;
     });
-    this.notesService.updateNotesEvent.subscribe((note: Note) => {
-      const updatedIndex = this.notes.findIndex(n => n.id === note.id);
-      this.notes[updatedIndex] = note;
+    this.notesService.updateNotesEvent.subscribe((note: Note | number) => {
+      if (typeof note === 'number') {
+        const deletedIndex = this.notes.findIndex(n => n.id === note);
+        this.notes.splice(deletedIndex, 1);
+      } else {
+        const updatedIndex = this.notes.findIndex(n => n.id === note.id);
+        this.notes[updatedIndex] = note;
+      }
       this.filterWeekNotes(this.notes);
     });
     if (this.route.data) {
