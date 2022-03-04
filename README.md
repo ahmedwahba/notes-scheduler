@@ -1,27 +1,38 @@
 # NotesScheduler
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.7.
+This project to display notes retrieved back from mock server then it can be edited and filtered with labels 
 
-## Development server
+## Developed features 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- It display current week tasks with title and ID then user can use arrows to load previous or next weeks tasks 
 
-## Code scaffolding
+   <img  src="screenshots/1.png"  />
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Theme can be toggled to dark from left most top bar  icon  
 
-## Build
+   <img  src="screenshots/2.png"  /> 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
+- Notes can be filtered by lable 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   <img  src="screenshots/3.png"  /> 
 
-## Running end-to-end tests
+- Note summary displayed as tip while hovering on a note 
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+   <img  src="screenshots/4.png"  /> 
 
-## Further help
+- Note details should be displayed with title, summary, start date and duration of the note, Also Note labels are on top of the summary.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+   <img  src="screenshots/5.png"  /> 
+
+- After clicking on edit button edit mode should be switched so you can change on summary, start date and duration.
+
+   <img  src="screenshots/6.png"  /> 
+
+
+## Coding notes
+
+- Stack size per day for any label is only 3 notes.
+- Changes applied after update affects only front end side so after refresh all changes reverted.
+- I have used Angular Material for UI component 
+- For dates calculations is done wth the help of `date-fns`
