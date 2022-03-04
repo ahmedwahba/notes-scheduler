@@ -1,0 +1,69 @@
+<mat-toolbar class="toolbar-header">
+  <mat-form-field appearance="fill" class="select-category">
+    <mat-select panelClass="categories-list-{{currentTheme}}"
+      [(value)]="selectedCategory"
+      (selectionChange)="onCategoryFilter()">
+      <mat-option value=""> all </mat-option>
+      <mat-option *ngFor="let category of categories" [value]="category.id">
+        {{category.text}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <span class="week-selection">
+    <button mat-icon-button class="icon-btn arrow-btn" (click)="getPreviousWeek()" aria-label="Go to previous week">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <span class="week-title">
+      {{ 'Calendar Week: ' + displayedWeek }}
+    </span>
+    <button mat-icon-button class="icon-btn arrow-btn" (click)="getNextWeek()" aria-label="Go to next week">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </span>
+  <button mat-icon-button class="icon-btn light-theme-icon" (click)="toggleTheme()" aria-label="Change current theme">
+    <mat-icon *ngIf="currentTheme === 'dark-theme'"  class="light">wb_incandescent</mat-icon>
+    <mat-icon *ngIf="currentTheme === 'light-theme'" class="dark">lightbulb_outline</mat-icon>
+  </button>
+</mat-toolbar>
+
+
+<div class="grid-wrapper">
+  <!-- categories column -->
+  <mat-grid-list cols="1" rowHeight="50px" class="categories-col">
+    <mat-grid-tile class="tabel-Headers" [rowspan]="2"></mat-grid-tile>
+    <mat-grid-tile
+        *ngFor="let category of filteredCategories"
+        [rowspan]="3"
+        class="tabel-Headers">
+      {{category.text}}
+    </mat-grid-tile>
+  </mat-grid-list>
+  <!-- working days row -->
+  <mat-grid-list [cols]="workingDays.length" rowHeight="100px" class="days-col top-corner">
+    <mat-grid-tile
+        *ngFor="let day of workingDays"
+        class="tabel-Headers">
+      {{ day | date: 'dd MMM'}}
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <mat-grid-list [cols]="workingDays.length" rowHeight="50px" class="days-col grid-cells-m">
+    <!-- notes background grid -->
+    <mat-grid-tile
+        *ngFor="let cell of gridCells;let i= index"
+        class="grid-bg"
+        [rowspan]="3"
+        [class.last-cell-corner]="(i == gridCells.length - 1)">
+    </mat-grid-tile>
+    <!-- allocated notes grid -->
+    <app-notes-stack-grid
+      class="notes-grid"
+      [notesCellsCount]="notesCellsCount"
+      [categories]="filteredCategories"
+      [weekStart]="workingDays[0]"
+      [weekEnd]="workingDays[workingDays.length - 1]"
+      [notes]="weekNotes">
+    </app-notes-stack-grid>
+  </mat-grid-list>
+</div>
+

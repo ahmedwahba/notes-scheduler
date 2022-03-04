@@ -1,0 +1,20 @@
+<mat-grid-list [cols]="cellsPerRowCount" rowHeight="50px" class="days-col grid-cells-m bottom-corner">
+  <mat-grid-tile
+    *ngFor="let cell of notesCells;let i= index"
+    [colspan]="(cell?.colsCount || cell?.colsCount == 0) ? cell.colsCount : 1"
+    [class.task-wrapper]="cell?.hasNote"
+    class="notes-grid-bg">
+    <button *ngIf="cell?.hasNote && cell.note"
+      (click)="openNoteDetails(cell.note)"
+      [matTooltip]="cell.note.summary"
+      [matTooltipPosition]="'below'"
+      attr.aria-label="{{cell.note.summary}}"
+      [class.is-started]="cell.isTaskStart"
+      [class.is-ended]="cell.isTaskEnd"
+      class="task-card">
+      <span class="task-id">{{ cell.note.id }}</span>
+      {{ cell.note.title|| ''}}
+    </button>
+  </mat-grid-tile>
+
+</mat-grid-list>

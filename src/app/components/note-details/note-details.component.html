@@ -1,0 +1,68 @@
+<form [formGroup]="editFormGroup" (ngSubmit)="onSaveClick()" *ngIf="note"  novalidate>
+<div mat-dialog-title class="note-title-card">
+      <span class="note-id">{{ note.id }}</span>
+        {{ note.title|| ''}}
+      </div>
+<mat-dialog-content class="mat-typography">
+  <mat-card class="details-card">
+    <mat-card-title-group>
+      <mat-card-subtitle>
+        <div class="categories">
+          <span *ngFor="let label of noteLabels" class="categories-name" >
+            {{ label.text }}
+          </span>
+        </div>
+        <div class="summary" [class.hidden-summary]="isEditingMode">{{ note.summary }}</div>
+        <div class="summary" *ngIf="isEditingMode">
+          <mat-form-field >
+            <mat-label>Note summary: </mat-label>
+            <textarea matInput formControlName="summary" placeholder="Write note summary ..." >
+              {{ note.summary }}
+            </textarea>
+          </mat-form-field>
+        </div>
+      </mat-card-subtitle>
+
+    </mat-card-title-group>
+    <mat-card-content>
+      <div class="start-date" *ngIf="!isEditingMode">
+        <span class="label"> Start date: </span>
+        {{ startDate| date: 'dd MMMM' }}
+      </div>
+      <div class="start-date" *ngIf="isEditingMode">
+        <mat-form-field >
+          <mat-label>Start date:</mat-label>
+          <input matInput [matDatepicker]="startDate" formControlName="startDate">
+          <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+          <mat-datepicker #startDate></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="duration" *ngIf="!isEditingMode">
+        <span class="label"> Duration: </span>
+        {{ note.duration }}
+      </div>
+      <div class="duration" *ngIf="isEditingMode">
+        <mat-form-field >
+          <mat-label>Duration:</mat-label>
+          <input matInput formControlName="duration" placeholder="note end date" >
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button *ngIf="isEditingMode"  mat-button
+    class="action-btn" mat-dialog-close
+    (click)="onCancelEditClick($event)">Cancel
+  </button>
+  <button *ngIf="isEditingMode" mat-button
+    class="action-btn" type="submit" [disabled]="!editFormGroup.valid"
+    cdkFocusInitial>Save
+  </button>
+  <button *ngIf="!isEditingMode" mat-button
+    class="action-btn" (click)="onEditClick($event)"
+    cdkFocusInitial>Edit
+  </button>
+</mat-dialog-actions>
+</form>
+

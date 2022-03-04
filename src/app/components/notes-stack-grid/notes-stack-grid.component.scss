@@ -1,0 +1,58 @@
+.notes-grid-bg {
+  background: transparent;
+}
+
+
+.bottom-corner {
+  .mat-grid-tile:last-child {
+    border-bottom-right-radius: 15px;
+  }
+}
+
+.grid-cells-m {
+  margin-top: -3px;
+}
+
+.task-wrapper {
+  margin-top: 4px;
+}
+
+.task-card {
+  border: 1px solid;
+  border-color: var(--task-border);
+  background: var(--task-bg);
+  padding: 3px;
+  color: var(--task-color);
+  width: 92%;
+  text-align: center;
+  cursor: pointer;
+  font-size: inherit;
+}
+
+.is-started {
+  margin-left: 2px;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.is-ended {
+  margin-right: 2px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.task-id {
+  padding: 2px;
+  font-size: x-small;
+  border-radius: 50%;
+  line-height: 1.5;
+  border: 1px solid;
+  font-weight: bold;
+  background: var(--task-id-bg);
+}
+
+@media screen and (max-width: 540px){
+  .task-id {
+    font-size: xx-small;
+  }
+}
